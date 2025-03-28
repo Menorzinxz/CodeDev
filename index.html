@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeDev - Aprenda Programação</title>
+    <link rel="stylesheet" href="./src/css/index.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">CodeDev</div>
+            <nav>
+                <ul class="nav-links">
+                </ul>
+            </nav>
+            <button class="login-btn" onclick="window.location.href='login.html'">Entrar</button>
+        </header>
+        
+        <section class="hero">
+            <div class="hero-content">
+                <h1>O jeito grátis, divertido e eficaz de aprender um !</h1>
+                <p>Milhões de pessoas estão aprendendo gratuitamente com a CodeDev. A maneira mais popular de aprender idiomas online!</p>
+                <div class="cta-buttons">
+                    <button class="primary-btn">CONECTE-SE AGORA</button>
+                    <button class="secondary-btn">JÁ TENHO UMA CONTA</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://d35aaqx5ub95lt.cloudfront.net/images/duo.svg" alt="CodeDev mascot">
+            </div>
+        </section>
+        
+        <section class="features">
+            <div class="feature">
+                <div class="feature-icon">🏆</div>
+                <h3>Aprendizado Científico</h3>
+                <p>Nossas lições são adaptadas para te ajudar a aprender no seu próprio ritmo.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">😊</div>
+                <h3>Divertido e Eficaz</h3>
+                <p>Aprenda enquanto se diverte com lições curtas e gamificadas.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🌍</div>
+                <h3>Para Todos</h3>
+                <p>Disponível em diversos idiomas e para todos os níveis.</p>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="footer-links">
+            <a href="#">Sobre</a>
+            <a href="#">Carreiras</a>
+            <a href="#">Privacidade</a>
+            <a href="#">Termos</a>
+        </div>
+        <p>© 2025 CodeDev - Todos os direitos reservados</p>
+    </footer>
+
+    <div class="theme-toggle-container">
+        <span class="theme-toggle-label" id="themeLabel">Tema</span>
+        <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+            <span class="theme-icon sun-icon">☀️</span>
+            <span class="theme-icon moon-icon">🌙</span>
+        </button>
+    </div>
+
+    <script src="./src/js/theme.js"></script>
+</body>
+</html>

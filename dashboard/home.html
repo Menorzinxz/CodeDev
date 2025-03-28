@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeDev - Aprenda Programação</title>
+    <link rel="stylesheet" href="../src/css/home.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">CodeDev</div>
+        
+        <div class="menu">
+            <div class="menu-item active" onclick="window.location.href='home.html'">
+                <i class="icon-learn"></i><span>APRENDER</span>
+            </div>
+            <div class="menu-item" onclick="window.location.href='praticar.html'">
+                <i class="icon-practice"></i><span>PRATICAR</span>
+            </div>
+            <div class="menu-item" onclick="window.location.href='ligas.html'">
+                <i class="icon-leagues"></i><span>LIGAS</span>
+            </div>
+            <div class="menu-item" onclick="window.location.href='missoes.html'">
+                <i class="icon-missions"></i><span>MISSÕES</span>
+            </div>
+            <div class="menu-item" onclick="window.location.href='loja.html'">
+                <i class="icon-shop"></i><span>LOJA</span>
+            </div>
+            <div class="menu-item" onclick="window.location.href='perfil.html'">
+                <i class="icon-profile"></i><span>PERFIL</span>
+            </div>
+            <div class="menu-item" onclick="window.location.href='configuracoes.html'">
+                <i class="icon-gear"></i><span><a href="configuracoes.html">CONFIGURAÇÕES</a></span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <h2 class="section-title">SEÇÃO 1, UNIDADE 1</h2>
+        
+        <div class="unit-card">
+            <div class="unit-title">Faça pedidos no café</div>
+            <div class="lessons">
+                <div class="lesson">CORECAR</div>
+                <div class="lesson">GITA</div>
+                <div class="lesson">EXPREMO</div>
+            </div>
+        </div>
+        
+        <div class="unit-card">
+            <div class="unit-title">Apresente-se e cumprimente os outros</div>
+            <div class="lessons">
+                <div class="lesson">LIÇÃO 1</div>
+                <div class="lesson">LIÇÃO 2</div>
+            </div>
+        </div>
+        
+        <div class="promo-banner">
+            Experimente o CodeDev Pro gratuitamente<br>
+            Acesso ilimitado, sem anúncios e recursos premium!
+            <button class="promo-button">TESTE 2 SEMANAS GRÁTIS</button>
+        </div>
+        
+        <div class="league-card">
+            <div class="league-header">
+                <div class="league-title">LIGAS</div>
+                <a href="#" class="view-link">VER LIGAS</a>
+            </div>
+            <div class="league-content">
+                Muito bem! Você terminou em 15º lugar e manterá a sua posição na Divisão Fruita.
+            </div>
+        </div>
+        
+        <div class="missions-section">
+            <div class="missions-header">
+                <h2 class="section-title">Missões do dia</h2>
+                <a href="#" class="view-link">VER TODAS</a>
+            </div>
+            
+            <div class="missions-grid">
+                <div class="mission-card">
+                    <div class="mission-title">Ganhe 10 XP</div>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 45%;"></div>
+                    </div>
+                    <div class="progress-text">8 / 18</div>
+                </div>
+                
+                <div class="mission-card">
+                    <div class="mission-title">Consiga 80% ou mais de acertos em 3 lições</div>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 100%;"></div>
+                    </div>
+                    <div class="progress-text">3 / 3</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Streak Widget -->
+    <div class="streak-widget"></div>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle-container">
+        <span class="theme-toggle-label" id="themeLabel">Tema</span>
+        <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+            <span class="theme-icon sun-icon">☀️</span>
+            <span class="theme-icon moon-icon">🌙</span>
+        </button>
+    </div>
+
+    <script src="../src/js/theme.js"></script>
+</body>
+</html>
