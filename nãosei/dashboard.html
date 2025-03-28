@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeNext | Plataforma de Ensino com IA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <style>
+        :root {
+            --primary: #7B68EE;
+            --primary-dark: #5D43D0;
+            --primary-light: #9D8AF5;
+            --accent: #6BCB77;
+            --error: #FF6B6B;
+            --text-primary: #F8F9FA;
+            --text-secondary: #ADB5BD;
+            --bg-primary: #121212;
+            --bg-secondary: #1E1E1E;
+            --bg-card: #252525;
+            --border: rgba(123, 104, 238, 0.3);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .light-mode {
+            --text-primary: #212529;
+            --text-secondary: #495057;
+            --bg-primary: #F8F9FA;
+            --bg-secondary: #FFFFFF;
+            --bg-card: #FFFFFF;
+            --border: rgba(123, 104, 238, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: var(--transition);
+        }
+
+        /* Layout Moderno */
+        .app-container {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Aprimorada */
+        .sidebar {
+            background-color: var(--bg-secondary);
+            border-right: 1px solid var(--border);
+            padding: 1.5rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Header Moderno */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        /* Componentes Modernos */
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            border: 1px solid var(--border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Editor de Código Integrado */
+        .code-editor {
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border);
+        }
+
+        .editor-header {
+            background-color: var(--bg-secondary);
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .editor-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* Botões Modernos */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Sistema de Tema */
+        .theme-switcher {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 1.25rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .app-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                height: auto;
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>CodeNext</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active">
+                    <i class="icon-dashboard"></i>
+                    Dashboard
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="icon-courses"></i>
+                    Cursos
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="icon-ai"></i>
+                    Assistente IA
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="icon-projects"></i>
+                    Projetos
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="icon-community"></i>
+                    Comunidade
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="icon-profile"></i>
+                    Perfil
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                <h1>Bem-vindo de volta, Dev!</h1>
+                <div class="header-actions">
+                    <button class="theme-switcher" id="themeToggle">🌙</button>
+                    <div class="user-avatar"></div>
+                </div>
+            </header>
+
+            <!-- Seção de Cursos em Destaque -->
+            <section class="featured-courses">
+                <h2>Seus Cursos em Andamento</h2>
+                <div class="courses-grid">
+                    <!-- Curso 1 -->
+                    <div class="card course-card">
+                        <div class="course-progress">
+                            <div class="progress-bar" style="width: 65%"></div>
+                        </div>
+                        <h3>Python com IA</h3>
+                        <p>Domine Python criando assistentes inteligentes</p>
+                        <button class="btn btn-primary">Continuar</button>
+                    </div>
+                    
+                    <!-- Curso 2 -->
+                    <div class="card course-card">
+                        <div class="course-progress">
+                            <div class="progress-bar" style="width: 30%"></div>
+                        </div>
+                        <h3>Web Moderno</h3>
+                        <p>Desenvolva aplicações web responsivas</p>
+                        <button class="btn btn-primary">Continuar</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Assistente de IA Integrado -->
+            <section class="ai-assistant">
+                <h2>Assistente de IA</h2>
+                <div class="card">
+                    <div class="code-editor">
+                        <div class="editor-header">
+                            <span>Seu Assistente de Código</span>
+                            <div class="editor-actions">
+                                <button class="btn">Explicar</button>
+                                <button class="btn">Otimizar</button>
+                                <button class="btn">Depurar</button>
+                            </div>
+                        </div>
+                        <div id="codeEditor" class="code-area"></div>
+                    </div>
+                    <div class="ai-response">
+                        <h4>Sugestões do Assistente:</h4>
+                        <div class="ai-message">
+                            <p>Seu código pode ser otimizado usando list comprehension aqui...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Dependências Front-end -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.36.1/min/vs/loader.min.js"></script>
+    
+    <script>
+        // Sistema de Tema Avançado
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        function checkThemePreference() {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const savedTheme = localStorage.getItem('codeNextTheme');
+            
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                enableDarkMode();
+            } else {
+                enableLightMode();
+            }
+        }
+        
+        function enableDarkMode() {
+            body.classList.add('dark-mode');
+            body.classList.remove('light-mode');
+            localStorage.setItem('codeNextTheme', 'dark');
+            themeToggle.textContent = '☀️';
+        }
+        
+        function enableLightMode() {
+            body.classList.add('light-mode');
+            body.classList.remove('dark-mode');
+            localStorage.setItem('codeNextTheme', 'light');
+            themeToggle.textContent = '🌙';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-mode')) {
+                enableLightMode();
+            } else {
+                enableDarkMode();
+            }
+        });
+        
+        // Inicialização do Editor Monaco
+        require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.36.1/min/vs' }});
+        
+        require(['vs/editor/editor.main'], function() {
+            const editor = monaco.editor.create(document.getElementById('codeEditor'), {
+                value: [
+                    '// Digite seu código aqui',
+                    'function calcularFatorial(n) {',
+                    '  if (n === 0) return 1;',
+                    '  return n * calcularFatorial(n - 1);',
+                    '}',
+                    '',
+                    'console.log(calcularFatorial(5));'
+                ].join('\n'),
+                language: 'javascript',
+                theme: body.classList.contains('dark-mode') ? 'vs-dark' : 'vs',
+                automaticLayout: true,
+                minimap: { enabled: false },
+                fontSize: 14,
+                lineNumbers: 'on',
+                scrollBeyondLastLine: false,
+                roundedSelection: true
+            });
+            
+            // Atualizar tema do editor quando mudar
+            themeToggle.addEventListener('click', () => {
+                monaco.editor.setTheme(body.classList.contains('dark-mode') ? 'vs-dark' : 'vs');
+            });
+        });
+        
+        // Highlight.js para snippets de código
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+        });
+        
+        checkThemePreference();
+    </script>
+</body>
+</html>

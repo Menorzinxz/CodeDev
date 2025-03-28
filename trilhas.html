@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duolingo</title>
+    <style>
+        :root {
+            --green-primary: #58cc02;
+            --green-secondary: #46a302;
+            --green-light: #58cc0270;
+            --blue-primary: #1cb0f6;
+            --white: #ffffff;
+            --gray-light: #f0f2f5;
+            --gray-medium: #e5e5e5;
+            --gray-dark: #888888;
+            --red: #ff4b4b;
+            --shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+        }
+        
+        body {
+            background-color: var(--gray-light);
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 230px;
+            background-color: var(--white);
+            height: 100vh;
+            position: fixed;
+            box-shadow: var(--shadow);
+        }
+        
+        .logo {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--gray-medium);
+        }
+        
+        .logo svg {
+            width: 120px;
+            height: 40px;
+        }
+        
+        .menu {
+            padding: 20px 0;
+        }
+        
+        .menu-item {
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 500;
+            color: #333;
+            position: relative;
+        }
+        
+        .menu-item:hover {
+            background-color: rgba(0,0,0,0.03);
+        }
+        
+        .menu-item.active {
+            background-color: var(--green-light);
+        }
+        
+        .menu-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: var(--green-primary);
+        }
+        
+        .menu-item i {
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        
+        .icon-learn {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2358cc02"><path d="M12 2L1 7l11 5 10-5-10-5zm0 7L1 14l11 5 10-5-10-5z"/><path d="M1 14v6l11 5 10-5v-6L12 19 1 14z"/></svg>');
+        }
+        
+        .icon-practice {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2358cc02"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>');
+        }
+        
+        .icon-leagues {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2358cc02"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg>');
+        }
+        
+        .icon-missions {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2358cc02"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.31-8.86c-1.77-.45-2.34-.94-2.34-1.67 0-.84.79-1.43 2.1-1.43 1.38 0 1.9.66 1.94 1.64h1.71c-.05-1.34-.87-2.57-2.49-2.97V5H10.9v1.69c-1.51.32-2.72 1.3-2.72 2.81 0 1.79 1.49 2.69 3.66 3.21 1.95.46 2.34 1.15 2.34 1.87 0 .53-.39 1.39-2.1 1.39-1.6 0-2.23-.72-2.32-1.64H8.04c.1 1.7 1.36 2.66 2.86 2.97V19h2.34v-1.67c1.52-.29 2.72-1.16 2.73-2.77-.01-2.2-1.9-2.96-3.66-3.42z"/></svg>');
+        }
+        
+        .icon-shop {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2358cc02"><path d="M16 6V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6h-4zm-6-2h4v2h-4V4z"/></svg>');
+        }
+        
+        .icon-profile {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2358cc02"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>');
+        }
+        
+        .icon-more {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2358cc02"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>');
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-left: 230px;
+            flex: 1;
+            padding: 30px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        /* Unit Cards */
+        .unit-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--green-primary);
+        }
+        
+        .unit-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+        
+        .lessons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .lesson {
+            background-color: var(--green-primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .lesson:hover {
+            background-color: var(--green-secondary);
+            transform: translateY(-1px);
+        }
+        
+        /* Promo Banner */
+        .promo-banner {
+            background: linear-gradient(to right, var(--green-primary), var(--green-secondary));
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+        }
+        
+        .promo-button {
+            background-color: var(--white);
+            color: var(--green-primary);
+            border: none;
+            padding: 10px 24px;
+            border-radius: 20px;
+            margin-top: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: var(--shadow);
+            transition: all 0.2s;
+        }
+        
+        .promo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* League Card */
+        .league-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+        }
+        
+        .league-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            align-items: center;
+        }
+        
+        .league-title {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .view-link {
+            color: var(--blue-primary);
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        
+        .view-link:hover {
+            text-decoration: underline;
+        }
+        
+        .league-content {
+            font-size: 14px;
+            color: #555;
+        }
+        
+        /* Missions */
+        .missions-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            align-items: center;
+        }
+        
+        .missions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+        }
+        
+        .mission-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+        
+        .mission-title {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        
+        .progress-container {
+            height: 6px;
+            background-color: var(--gray-medium);
+            border-radius: 3px;
+            margin: 12px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--green-primary);
+            border-radius: 3px;
+        }
+        
+        .progress-text {
+            font-size: 13px;
+            color: var(--gray-dark);
+        }
+        
+        /* Streak */
+        .streak-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--white);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+        }
+        
+        .streak-widget::before {
+            content: '🔥';
+            font-size: 24px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 80px;
+            }
+            
+            .menu-item span {
+                display: none;
+            }
+            
+            .menu-item i {
+                margin-right: 0;
+            }
+            
+            .main-content {
+                margin-left: 80px;
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .sidebar {
+                width: 60px;
+            }
+            
+            .main-content {
+                margin-left: 60px;
+            }
+            
+            .missions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <svg viewBox="0 0 138 26" fill="#58CC02" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 8a7 7 0 100 10m7-8.5a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0zm-7 3.5a3.5 3.5 0 100-7 3.5 3.5 0 000 7z" stroke="currentColor" stroke-width="2.5"></path>
+                <path d="M52.6 10.2c-.9-1-2.3-1.6-4-1.6-3.3 0-5.8 2.6-5.8 6.4s2.5 6.4 5.8 6.4c1.6 0 3-.6 4-1.6v1.3h3.3V8.9h-3.3v1.3zm-1.7 7.8c-1 0-1.8-.9-1.8-2.3s.8-2.3 1.8-2.3 1.8.9 1.8 2.3-.8 2.3-1.8 2.3zM65.7 19.7h-3.4v-7.2h-2.3V8.9h8v3.6h-2.3v7.2zM72.2 19.7V8.9h6.8v3.2h-3.5v1.6h3.2v3.1h-3.2v1.6h3.5v3.3h-6.8zM88.1 19.7l-2.7-5.4-2.7 5.4h-3.6l4.5-8.4-4.1-7.7h3.7l2.2 4.5 2.2-4.5h3.6l-4.1 7.7 4.5 8.4h-3.7zM99.2 19.7V8.9h3.3v10.8h-3.3zM108.4 19.7l-3.3-4.8v4.8h-3.3V8.9h3.3v7.5l3.1-4.5h4l-4.1 5.7 4.3 6.1h-4zM123.2 19.7l-2.7-5.4-2.7 5.4h-3.6l4.5-8.4-4.1-7.7h3.7l2.2 4.5 2.2-4.5h3.6l-4.1 7.7 4.5 8.4h-3.7zM133.8 19.7V8.9h6.8v3.2h-3.5v1.6h3.2v3.1h-3.2v1.6h3.5v3.3h-6.8z"></path>
+            </svg>
+        </div>
+        
+        <div class="menu">
+            <div class="menu-item active">
+                <i class="icon-learn"></i><span>APRENDER</span>
+            </div>
+            <div class="menu-item">
+                <i class="icon-practice"></i><span>PRATICAR</span>
+            </div>
+            <div class="menu-item">
+                <i class="icon-leagues"></i><span>LIGAS</span>
+            </div>
+            <div class="menu-item">
+                <i class="icon-missions"></i><span>MISSÕES</span>
+            </div>
+            <div class="menu-item">
+                <i class="icon-shop"></i><span>LOJA</span>
+            </div>
+            <div class="menu-item">
+                <i class="icon-profile"></i><span>PERFIL</span>
+            </div>
+            <div class="menu-item">
+                <i class="icon-more"></i><span>MAIS</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <h2 class="section-title">SEÇÃO 1, UNIDADE 1</h2>
+        
+        <div class="unit-card">
+            <div class="unit-title">Faça pedidos no café</div>
+            <div class="lessons">
+                <div class="lesson">CORECAR</div>
+                <div class="lesson">GITA</div>
+                <div class="lesson">EXPREMO</div>
+            </div>
+        </div>
+        
+        <div class="unit-card">
+            <div class="unit-title">Apresente-se e cumprimente os outros</div>
+            <div class="lessons">
+                <div class="lesson">LIÇÃO 1</div>
+                <div class="lesson">LIÇÃO 2</div>
+            </div>
+        </div>
+        
+        <div class="promo-banner">
+            Experimente o Super de graça<br>
+            Zero anúncios, prática personalizada e nível dos itãs: iluminado!
+            <button class="promo-button">TESTE 2 SEMANAS GRÁTIS</button>
+        </div>
+        
+        <div class="league-card">
+            <div class="league-header">
+                <div class="league-title">LIGAS</div>
+                <a href="#" class="view-link">VER LIGAS</a>
+            </div>
+            <div class="league-content">
+                Muito bem! Você terminou em 15º lugar e manterá a sua posição na Divisão Fruita.
+            </div>
+        </div>
+        
+        <div class="missions-section">
+            <div class="missions-header">
+                <h2 class="section-title">Missões do dia</h2>
+                <a href="#" class="view-link">VER TODAS</a>
+            </div>
+            
+            <div class="missions-grid">
+                <div class="mission-card">
+                    <div class="mission-title">Ganhe 10 XP</div>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 45%;"></div>
+                    </div>
+                    <div class="progress-text">8 / 18</div>
+                </div>
+                
+                <div class="mission-card">
+                    <div class="mission-title">Consiga 80% ou mais de acertos em 3 lições</div>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 100%;"></div>
+                    </div>
+                    <div class="progress-text">3 / 3</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Streak Widget -->
+    <div class="streak-widget"></div>
+    
+    <script>
+        // Simulação da funcionalidade do Duolingo
+        document.addEventListener('DOMContentLoaded', function() {
+            // Menu ativo
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Lições clicáveis
+            const lessons = document.querySelectorAll('.lesson');
+            lessons.forEach(lesson => {
+                lesson.addEventListener('click', function() {
+                    alert(`Iniciando lição: ${this.textContent}`);
+                });
+            });
+            
+            // Botão de trial
+            const trialButton = document.querySelector('.promo-button');
+            trialButton.addEventListener('click', function() {
+                alert('Teste gratuito iniciado! Aproveite 2 semanas de Duolingo Super.');
+            });
+            
+            // Widget de streak
+            const streakWidget = document.querySelector('.streak-widget');
+            streakWidget.addEventListener('click', function() {
+                alert('Seu streak: 3 dias consecutivos!');
+            });
+        });
+    </script>
+</body>
+</html>
