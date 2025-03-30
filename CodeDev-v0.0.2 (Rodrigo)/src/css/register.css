@@ -1,0 +1,435 @@
+:root {
+  --primary-color: #7b68ee;
+  --text-color: #000000;
+  --bg-color: #ffffff;
+  --secondary-bg: #f5f5f5;
+  --card-bg: #ffffff;
+  --footer-bg: #1c1c1c;
+  --input-bg: rgba(0, 0, 0, 0.05);
+  --input-border: rgba(123, 104, 238, 0.2);
+  --error-color: #ff4b4b;
+  --menu-item-padding: 16px 25px;
+}
+
+.dark-mode {
+  --primary-color: #7b68ee;
+  --text-color: #ffffff;
+  --bg-color: #121212;
+  --secondary-bg: #1c1c1c;
+  --card-bg: #1e1e1e;
+  --footer-bg: #000000;
+  --input-bg: rgba(255, 255, 255, 0.05);
+  --input-border: rgba(123, 104, 238, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center; /* Adicionado para centralizar horizontalmente */
+}
+
+.logo {
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--input-border);
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--primary-color);
+  padding: 0 20px;
+}
+
+.menu {
+  padding: 20px 0;
+}
+
+.menu-item {
+  padding: var(--menu-item-padding);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text-color);
+  position: relative;
+  margin: 8px 0;
+  border-radius: 8px;
+}
+
+.menu-item:hover {
+  background-color: var(--input-bg);
+}
+
+.menu-item.active {
+  background-color: rgba(123, 104, 238, 0.1);
+  font-weight: 600;
+}
+
+.menu-item.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background-color: var(--primary-color);
+  border-radius: 0 8px 8px 0;
+}
+
+.menu-item i {
+  width: 28px;
+  height: 28px;
+  margin-right: 15px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* Main Content - Alterado para centralizar sem sidebar */
+.main-content {
+  margin-left: 0; /* Removido o margin-left da sidebar */
+  flex: 1;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.auth-container {
+  max-width: 450px;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Todo o resto do seu CSS permanece EXATAMENTE igual */
+.auth-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.auth-title {
+  font-size: 26px;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+}
+
+.auth-subtitle {
+  color: var(--text-color);
+  opacity: 0.8;
+  font-size: 16px;
+}
+
+.auth-card {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 35px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--input-border);
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: var(--text-color);
+  font-size: 15px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--input-border);
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  font-size: 16px;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(123, 104, 238, 0.2);
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, var(--primary-color) 0%, #5d43d0 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 15px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.auth-btn:hover {
+  background-color: #6a5acd;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(123, 104, 238, 0.3);
+}
+
+.auth-btn::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 45%,
+    rgba(255, 255, 255, 0) 50%
+  );
+  transform: rotate(30deg);
+  transition: all 0.5s;
+}
+
+.auth-btn:hover::after {
+  opacity: 1;
+  left: 100%;
+  top: 100%;
+}
+
+.auth-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 10px rgba(123, 104, 238, 0.4);
+}
+
+.spinner {
+  display: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 25px;
+  color: var(--text-color);
+  font-size: 15px;
+}
+
+.auth-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+.theme-toggle-container {
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--card-bg);
+  padding: 10px 15px;
+  border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  border: 1px solid var(--input-border);
+}
+
+.theme-toggle {
+  width: 50px;
+  height: 28px;
+  background-color: var(--input-bg);
+  border-radius: 14px;
+  position: relative;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+  border: 1px solid rgba(123, 104, 238, 0.4);
+}
+
+.theme-toggle::before {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  left: 3px;
+  transition: transform 0.3s ease;
+  z-index: 2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .theme-toggle::before {
+  transform: translateX(22px);
+}
+
+.theme-icon {
+  font-size: 16px;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.sun-icon {
+  opacity: 0;
+  color: #ffc107;
+}
+
+.moon-icon {
+  opacity: 1;
+  color: #7b68ee;
+}
+
+.dark-mode .sun-icon {
+  opacity: 1;
+}
+
+.dark-mode .moon-icon {
+  opacity: 0;
+}
+
+.theme-toggle-label {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .logo span {
+    display: none;
+  }
+
+  .menu-item span {
+    display: none;
+  }
+
+  .main-content {
+    margin-left: 80px;
+  }
+}
+
+.password-reset-info {
+  margin-bottom: 25px;
+  padding: 15px;
+  background-color: rgba(123, 104, 238, 0.1);
+  border-radius: 8px;
+  border-left: 4px solid var(--primary-color);
+  font-size: 14px;
+}
+
+.success-message {
+  display: none;
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(46, 204, 113, 0.1);
+  border-radius: 8px;
+  margin-bottom: 25px;
+  border-left: 4px solid #2ecc71;
+}
+
+.success-message.active {
+  display: block;
+}
+
+/* Sistema de Notificações */
+.notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  max-width: 350px;
+  width: 100%;
+}
+
+.notification {
+  position: relative;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  color: white;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateX(150%);
+  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.notification.show {
+  transform: translateX(0);
+}
+
+.notification.success {
+  background-color: #2ecc71;
+  border-left: 4px solid #27ae60;
+}
+
+.notification.error {
+  background-color: #e74c3c;
+  border-left: 4px solid #c0392b;
+}
+
+.notification-close {
+  margin-left: auto;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.notification-close:hover {
+  opacity: 1;
+}
+
+.spinner {
+  display: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
