@@ -1,80 +1,120 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CodeNext | Login</title>
-    <link rel="stylesheet" href="./src/css/login.css">
-</head>
-<body class="dark-mode">
+    <link rel="stylesheet" href="./src/css/login.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  </head>
+  <body class="dark-mode">
     <div class="login-container">
-        <div class="logo">
-            <div class="logo-icon">{ }</div>
-            <div class="logo-text">CodeNext</div>
-            <div class="logo-subtext">Aprenda. Pratique. Domine.</div>
+      <div class="logo">
+        <div class="logo-icon">{ }</div>
+        <div class="logo-text">CodeNext</div>
+        <div class="logo-subtext">Aprenda. Pratique. Domine.</div>
+      </div>
+
+      <form class="login-form" id="loginForm">
+        <div class="input-group">
+          <label for="email"> <i class="fas fa-envelope"></i> E-mail </label>
+          <input type="email" id="email" placeholder="seu@email.com" required />
+          <div class="input-error" id="email-error">
+            Por favor, insira um e-mail válido
+          </div>
         </div>
 
-        <form class="login-form" id="loginForm">
-            <div class="input-group">
-                <label for="email">E-mail</label>
-                <input type="email" id="email" placeholder="seu@email.com" required>
-                <div class="input-error" id="email-error">Por favor, insira um e-mail válido</div>
-            </div>
-
-            <div class="input-group">
-                <label for="password">Senha</label>
-                <input type="password" id="password" placeholder="••••••••" required minlength="6">
-                <div class="input-error" id="password-error">A senha deve ter pelo menos 6 caracteres</div>
-            </div>
-
-            <button type="submit" class="login-button" id="submitBtn">
-                <span class="spinner" id="spinner"></span>
-                <span id="buttonText">Entrar</span>
-            </button>
-        </form>
-
-        <div class="divider">ou continue com</div>
-
-        <div class="social-login">
-            <div class="social-btn">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 0C5.372 0 0 5.372 0 12C0 17.084 3.164 21.426 7.608 23.18C7.144 22.092 6.912 20.64 6.912 19.096C6.912 14.444 8.728 10.4 12 10.4C15.272 10.4 17.088 14.444 17.088 19.096C17.088 20.64 16.856 22.092 16.392 23.18C20.836 21.426 24 17.084 24 12C24 5.372 18.628 0 12 0Z" fill="currentColor"/>
-                </svg>
-            </div>
-            <div class="social-btn">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 0C5.372 0 0 5.372 0 12C0 17.084 3.164 21.426 7.608 23.18C7.144 22.092 6.912 20.64 6.912 19.096C6.912 14.444 8.728 10.4 12 10.4C15.272 10.4 17.088 14.444 17.088 19.096C17.088 20.64 16.856 22.092 16.392 23.18C20.836 21.426 24 17.084 24 12C24 5.372 18.628 0 12 0Z" fill="currentColor"/>
-                </svg>
-            </div>
-            <div class="social-btn">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 0C5.372 0 0 5.372 0 12C0 17.084 3.164 21.426 7.608 23.18C7.144 22.092 6.912 20.64 6.912 19.096C6.912 14.444 8.728 10.4 12 10.4C15.272 10.4 17.088 14.444 17.088 19.096C17.088 20.64 16.856 22.092 16.392 23.18C20.836 21.426 24 17.084 24 12C24 5.372 18.628 0 12 0Z" fill="currentColor"/>
-                </svg>
-            </div>
+        <div class="input-group">
+          <label for="password"> <i class="fa-solid fa-key"></i> Senha</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="••••••••"
+            required
+            minlength="6"
+          />
+          <div class="input-error" id="password-error">
+            A senha deve ter pelo menos 6 caracteres
+          </div>
         </div>
 
-        <div class="footer-links">
-            <div style="margin-bottom: 5px;">
-                <a href="#">Crie uma conta</a> 
-            </div>
-
-            <div>
-                <a href="#">Esqueceu a senha?</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Novo Toggle de Tema -->
-    <div class="theme-toggle-container">
-        <span class="theme-toggle-label" id="themeLabel">Tema</span>
-        <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
-            <span class="theme-icon sun-icon">☀️</span>
-            <span class="theme-icon moon-icon">🌙</span>
+        <button type="submit" class="login-button" id="submitBtn">
+          <span class="spinner" id="spinner"></span>
+          <span id="buttonText">Entrar</span>
         </button>
+      </form>
+
+      <div class="divider">ou continue com</div>
+
+      <div class="social-login">
+        <div class="social-btn">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 0C5.372 0 0 5.372 0 12C0 17.084 3.164 21.426 7.608 23.18C7.144 22.092 6.912 20.64 6.912 19.096C6.912 14.444 8.728 10.4 12 10.4C15.272 10.4 17.088 14.444 17.088 19.096C17.088 20.64 16.856 22.092 16.392 23.18C20.836 21.426 24 17.084 24 12C24 5.372 18.628 0 12 0Z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+        <div class="social-btn">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 0C5.372 0 0 5.372 0 12C0 17.084 3.164 21.426 7.608 23.18C7.144 22.092 6.912 20.64 6.912 19.096C6.912 14.444 8.728 10.4 12 10.4C15.272 10.4 17.088 14.444 17.088 19.096C17.088 20.64 16.856 22.092 16.392 23.18C20.836 21.426 24 17.084 24 12C24 5.372 18.628 0 12 0Z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+        <div class="social-btn">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 0C5.372 0 0 5.372 0 12C0 17.084 3.164 21.426 7.608 23.18C7.144 22.092 6.912 20.64 6.912 19.096C6.912 14.444 8.728 10.4 12 10.4C15.272 10.4 17.088 14.444 17.088 19.096C17.088 20.64 16.856 22.092 16.392 23.18C20.836 21.426 24 17.084 24 12C24 5.372 18.628 0 12 0Z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <div style="margin-bottom: 5px">
+          <a href="register.html"> <i class="fas fa-user-plus"></i> Crie uma conta</a>
+        </div>
+        <div>
+          <a href="forgot-password.html"> <i class="fa-solid fa-key"></i> Esqueceu a senha?</a>
+        </div>
+      </div>
     </div>
 
-    <div class="notification" id="notification"></div>
+    <!-- Toggle de Tema -->
+    <div class="theme-toggle-container">
+      <span class="theme-toggle-label" id="themeLabel">Tema</span>
+      <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+        <span class="theme-icon sun-icon">☀️</span>
+        <span class="theme-icon moon-icon">🌙</span>
+      </button>
+    </div>
 
-    <script src="./src/js/theme.js"></script>
-</body>
+    <div class="notification-container" id="notificationContainer"></div>
+
+    <!-- Inclusão do JavaScript externo -->
+    <script src="./src/js/login.js"></script>
+  </body>
 </html>
