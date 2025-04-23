@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recuperação de Senha - CodeDev</title>
+    <link rel="stylesheet" href="./assets/css/forgot-password.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  </head>
+  <body>
+    <div class="container">
+      <div class="auth-wrapper">
+        <div class="auth-container">
+          <div class="auth-header">
+            <div class="logo">
+              <i class="fas fa-key"></i>
+              <h1>CodeDev</h1>
+            </div>
+            <h2 class="auth-title">Redefinir sua senha</h2>
+            <p class="auth-subtitle">
+              Digite seu e-mail para receber o link de redefinição
+            </p>
+          </div>
+
+          <div class="auth-card">
+            <div id="successMessage" class="success-message">
+              <i class="fas fa-check-circle"></i>
+              <p>
+                Enviamos um link para <strong id="sentEmail"></strong>.
+                Verifique sua caixa de entrada.
+              </p>
+            </div>
+
+            <form id="forgotPasswordForm">
+              <div class="form-group">
+                <label for="email" class="form-label">
+                  <i class="fas fa-envelope"></i> E-mail cadastrado
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  class="form-input"
+                  placeholder="exemplo@email.com"
+                  required
+                />
+                <div class="form-hint">
+                  <i class="fas fa-info-circle"></i> Digite o e-mail associado à
+                  sua conta
+                </div>
+              </div>
+
+              <button type="submit" class="auth-btn" id="submitBtn">
+                <span class="btn-text">Enviar link</span>
+                <i class="fas fa-paper-plane btn-icon"></i>
+              </button>
+            </form>
+
+            <div class="auth-footer">
+              <p>
+                Lembrou sua senha?
+                <a href="login.php" class="auth-link"> <i class="fas fa-sign-in-alt"></i> Faça login</a>
+              </p>
+              <p>
+                Não tem uma conta?
+                <a href="register.php" class="auth-link"
+                  ><i class="fas fa-user-plus"></i> Crie uma conta</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Toggle de Tema -->
+      <div class="theme-toggle-container">
+        <span class="theme-toggle-label" id="themeLabel">Modo Claro</span>
+        <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+          <span class="theme-icon sun-icon">☀️</span>
+          <span class="theme-icon moon-icon">🌙</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="notification-container" id="notificationContainer"></div>
+
+    <script src="assets/js/forgot-password.js"></script>
+  </body>
+</html>
